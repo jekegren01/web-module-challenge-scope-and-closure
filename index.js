@@ -124,10 +124,10 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(getInningScore, inning, numberOfInnings) {
+function scoreboard(getInningScore, cb, numberOfInnings) {
   let currentInning = 1;
   const scoreList = new Array(numberOfInnings + 1).fill({ Home: 0, Away: 0 });
-  const inningScore = getInningScore(inning, 1);
+  const inningScore = getInningScore(cb, 1);
   return () => {
     const { Home, Away } = inningScore();
     scoreList[currentInning] = { Home, Away };
