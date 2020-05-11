@@ -64,12 +64,13 @@ Write a function called `inning` that generates a random number of points that a
 function inning(){
 
     const score = (Math.round(Math.random() * 2));
-    console.log(score);
+    return score;
+    // console.log(score);
 }
 
-inning();
-inning(2);
-inning(3);
+console.log(inning());
+// inning(2);
+// inning(3);
 
 /* Task 3: finalScore()
 
@@ -85,11 +86,22 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
-
+function finalScore(inning, num) {
+  let Home = 0;
+  let Away = 0;
+  let homeBatting = true;
+  return function () {
+    for (let i = 1; i <= num; i++) {
+      if (homeBatting === true) Home += inning();
+      else Away += inning();
+      homeBatting = !homeBatting;
+    }
+    return { Home, Away };
+  };
 }
+
+const getInningScore = finalScore(inning, 9);
+console.log(getInningScore());
 
 /* Task 4: 
 
@@ -112,8 +124,29 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScore, inning, numberOfInnings) {
+  let currentInning = 1;
+  const scoreList = new Array(numberOfInnings + 1).fill({ Home: 0, Away: 0 });
+  const inningScore = getInningScore(inning, 1);
+  return () => {
+    const { Home, Away } = inningScore();
+    scoreList[currentInning] = { Home, Away };
+    let end = "st";
+    if (currentInning === 2) end = "nd";
+    else if (currentInning === 3) end = "rd";
+    else if (currentInning > 3) end = "th";
+    return `${currentInning++ + end} inning: ${Away} - ${Home}`;
+  };
 }
 
 
+const sb = scoreboard(finalScore, inning, 9);
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
