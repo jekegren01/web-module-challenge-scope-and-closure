@@ -15,7 +15,7 @@
  * should return 'foofoo'.
 */
 function processFirstItem(stringList, callback) {
-  return callback(stringList[0])
+  return callback(stringList[0]);
 }
 
 // ⭐️ Example Challenge END ⭐️
@@ -28,10 +28,15 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ *    Counter 2 is using a global variable inside of its function.  Counter 1 is defining the count variable inside of its function, maintaining scope.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ *    Because counter 1 have the variable defined inside of the function, it is using closure. 
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ *    
+ *    Counter 2 would only be useful if other functions needed to access the same global variable. Otherwise, counter 1 is preferrable due to it maintain all of its needed variables defined with in the function itself. 
 */
 
 // counter1 code
@@ -56,11 +61,15 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
-
+    const score = (Math.round(Math.random() * 2));
+    console.log(score);
 }
+
+inning();
+inning(2);
+inning(3);
 
 /* Task 3: finalScore()
 
