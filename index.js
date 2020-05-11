@@ -86,22 +86,22 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(inning, num) {
+function finalScore(cb, num) {
   let Home = 0;
   let Away = 0;
-  let homeBatting = true;
+  let topOrBtm = true;
   return function () {
     for (let i = 1; i <= num; i++) {
-      if (homeBatting === true) Home += inning();
-      else Away += inning();
-      homeBatting = !homeBatting;
+      if (topOrBtm === true) Home += cb();
+      else Away += cb();
+      topOrBtm = !topOrBtm;
     }
     return { Home, Away };
   };
 }
 
-const getInningScore = finalScore(inning, 9);
-console.log(getInningScore());
+const inningScore = finalScore(inning, 9);
+console.log(inningScore());
 
 /* Task 4: 
 
