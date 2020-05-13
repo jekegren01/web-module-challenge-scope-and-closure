@@ -150,3 +150,48 @@ console.log(sb());
 console.log(sb());
 console.log(sb());
 console.log(sb());
+
+
+// function sum(numbers) {
+//   return numbers.reduce((sum, next) => sum + next, 0)
+// }
+
+// function scoreboard(getInningScore, inning, inningCount) {
+//   const homeTeamScores = [];
+//   const awayTeamScores = [];
+
+//   for (let currentInning = 1; currentInning <= inningCount; ++currentInning) {
+//     homeTeamScores.push(inning())
+//     awayTeamScores.push(inning())
+//   }
+
+//   let ret = '';
+
+//   for (let i=0; i<homeTeamScores.length; ++i) {
+//     const inning = i+1; // correct for 0-based indexing
+//     let suffix = 'th';
+//     switch (inning) {
+//       case 1:
+//         suffix = 'st';
+//         break;
+//       case 2:
+//         suffix = 'nd';
+//         break;
+//       case 3:
+//         suffix = 'rd'
+//         break;
+//       default:
+//         suffix = 'th';
+//         break;
+//     }
+//     ret += `${inning}${suffix} inning: ${awayTeamScores[i]} - ${homeTeamScores[i]}\n`
+//   }
+
+//   ret += '\n'
+
+//   ret += `Final score: ${sum(awayTeamScores)} - ${sum(homeTeamScores)}`
+
+//   return ret;
+// }
+
+// console.log(scoreboard(undefined, inning, 9));
