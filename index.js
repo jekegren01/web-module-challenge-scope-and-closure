@@ -15,7 +15,7 @@
  * should return 'foofoo'.
 */
 function processFirstItem(stringList, callback) {
-  return callback(stringList[0])
+  return callback(stringList[0]);
 }
 
 // ⭐️ Example Challenge END ⭐️
@@ -28,10 +28,15 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ *    Counter 2 is using a global variable inside of its function.  Counter 1 is defining the count variable inside of its function, maintaining scope.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ *    Because counter 1 have the variable defined inside of the function, it is using closure. 
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ *    
+ *    Counter 2 would only be useful if other functions needed to access the same global variable. Otherwise, counter 1 is preferrable due to it maintain all of its needed variables defined with in the function itself. 
 */
 
 // counter1 code
@@ -56,11 +61,16 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
-
+    const score = (Math.round(Math.random() * 2));
+    return score;
+    // console.log(score);
 }
+
+console.log(inning());
+// inning(2);
+// inning(3);
 
 /* Task 3: finalScore()
 
@@ -76,11 +86,22 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
-
+function finalScore(cb, num) {
+  let Home = 0;
+  let Away = 0;
+  let topOrBtm = true;
+  return function () {
+    for (let i = 1; i <= num; i++) {
+      if (topOrBtm === true) Home += cb();
+      else Away += cb();
+      topOrBtm = !topOrBtm;
+    }
+    return { Home, Away };
+  };
 }
+
+const inningScore = finalScore(inning, 9);
+console.log(inningScore());
 
 /* Task 4: 
 
@@ -103,8 +124,74 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScore, cb, numberOfInnings) {
+  let currentInning = 1;
+  const scoreList = new Array(numberOfInnings + 1).fill({ Home: 0, Away: 0 });
+  const inningScore = getInningScore(cb, 1);
+  return () => {
+    const { Home, Away } = inningScore();
+    scoreList[currentInning] = { Home, Away };
+    let end = "st";
+    if (currentInning === 2) end = "nd";
+    else if (currentInning === 3) end = "rd";
+    else if (currentInning > 3) end = "th";
+    return `${currentInning++ + end} inning: ${Away} - ${Home}`;
+  };
 }
 
 
+const sb = scoreboard(finalScore, inning, 9);
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+console.log(sb());
+
+
+// function sum(numbers) {
+//   return numbers.reduce((sum, next) => sum + next, 0)
+// }
+
+// function scoreboard(getInningScore, inning, inningCount) {
+//   const homeTeamScores = [];
+//   const awayTeamScores = [];
+
+//   for (let currentInning = 1; currentInning <= inningCount; ++currentInning) {
+//     homeTeamScores.push(inning())
+//     awayTeamScores.push(inning())
+//   }
+
+//   let ret = '';
+
+//   for (let i=0; i<homeTeamScores.length; ++i) {
+//     const inning = i+1; // correct for 0-based indexing
+//     let suffix = 'th';
+//     switch (inning) {
+//       case 1:
+//         suffix = 'st';
+//         break;
+//       case 2:
+//         suffix = 'nd';
+//         break;
+//       case 3:
+//         suffix = 'rd'
+//         break;
+//       default:
+//         suffix = 'th';
+//         break;
+//     }
+//     ret += `${inning}${suffix} inning: ${awayTeamScores[i]} - ${homeTeamScores[i]}\n`
+//   }
+
+//   ret += '\n'
+
+//   ret += `Final score: ${sum(awayTeamScores)} - ${sum(homeTeamScores)}`
+
+//   return ret;
+// }
+
+// console.log(scoreboard(undefined, inning, 9));

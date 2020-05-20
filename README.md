@@ -1,5 +1,7 @@
 # Scope and Closure Challenge
 
+
+
 The module challenge is the afternoon project or assignment that students work through independently. This expands on the guided project completed earlier with the instructor.
 
 ## JavaScript Foundations
@@ -42,6 +44,8 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+      Closure is the primary method for creating data privacy.  Variables within a function are only in scope as far as the outer function is concerned.  Data outside the scope of the objects privilege methods are inaccessible. 
+
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -63,8 +67,11 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+      The parameter is the only example of closure in this code.  Name is defined outside the curly brackets and accessible inside of the brackes during the console.log method.
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+      The name that is called by either of the two new const's will always be the same when the function is invoked. The roll of the dice is what can change. 
 c. What is the lexical scope of `newRoll`? 
+      The lexical scope is within the function only.
 
 ### Task 3 - Stretch Goals
 
